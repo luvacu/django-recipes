@@ -17,3 +17,6 @@ media
 # Byte-compiled / optimized / DLL files
 *.py[cod]
 *$py.class
+
+# OS specific
+.DS_Store

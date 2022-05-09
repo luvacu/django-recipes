@@ -48,3 +48,18 @@ pip-compile requirements.in 	# Updates requirements.txt
 pip install -r requirements.txt # Installs the dependencies
 ```
 
+### 3. Install Docker
+
+You'll run the Django app in a Docker container. 
+
+
+## How to run the project
+
+After installing all the tools listed before, you can now run the project with `docker-compose`:
+
+```bash
+docker-compose up --build
+```
+
+Notice you can skip the build step by removing the `--build` option.
+

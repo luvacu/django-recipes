@@ -1,4 +1,5 @@
-from .models import Recipe
+from .models import Recipe, Ingredient
+from django.db import transaction
 
 
 class RecipesRepository:
@@ -20,3 +21,22 @@ class RecipesRepository:
         except Recipe.DoesNotExist:
             return None
         return recipe.to_dto()
+
+    @staticmethod
+    def create_recipe_and_ingredients(recipe: dict, ingredients: list):
+        with transaction.atomic():
+            ingredient_objects = [Ingredient(**ingredient) for ingredient in ingredients]
+            created_ingredients = Ingredient.objects.bulk_create(ingredient_objects)
+            created_recipe = Recipe.objects.create(**recipe)
+            created_recipe.ingredients.set(created_ingredients)
+
+        return created_recipe.to_dto()
+
+    @staticmethod
+    def create_recipe_with_ingredient_pks(recipe: dict, ingredient_pks: list):
+        with transaction.atomic():
+            ingredients = Ingredient.objects.filter(pk__in=ingredient_pks)
+            created_recipe = Recipe.objects.create(recipe)
+            created_recipe.ingredients.set(ingredients)
+
+        return created_recipe.to_dto()

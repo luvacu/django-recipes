@@ -6,7 +6,10 @@ class IngredientSerializer(serializers.Serializer):
 
 
 class RecipeSerializer(serializers.Serializer):
-    id = serializers.CharField()
     name = serializers.CharField()
     description = serializers.CharField()
     ingredients = IngredientSerializer(many=True)
+
+
+class FullRecipeSerializer(RecipeSerializer):
+    id = serializers.CharField()

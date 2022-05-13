@@ -40,3 +40,12 @@ class RecipesRepository:
             created_recipe.ingredients.set(ingredients)
 
         return created_recipe.to_dto()
+
+    @staticmethod
+    def delete_recipe(pk):
+        try:
+            recipe = Recipe.objects.get(pk=pk)
+            recipe.delete()
+        except Recipe.DoesNotExist:
+            return False
+        return True

@@ -6,7 +6,12 @@ ENV PYTHONUNBUFFERED 1
 
 WORKDIR /app
 
-COPY ./requirements.txt .
-RUN pip install -r /app/requirements.txt
+ARG DEV_BUILD=false
+COPY ./requirements*.txt .
+RUN if [ "$DEV_BUILD" = "true" ]; then \
+      pip install -r /app/requirements-dev.txt; \
+    else \
+      pip install -r /app/requirements.txt; \
+    fi
 
 COPY . .

@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from core.views import RecipesView, RecipeDetailView
+from apps.recipes.views import RecipesView, RecipeDetailView
+
 
 urlpatterns_v1 = [
     path('recipes/', include([

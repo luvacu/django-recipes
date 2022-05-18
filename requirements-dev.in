@@ -1,0 +1,3 @@
+-c requirements.txt # constrain the dev requirements to packages already selected for production in requirements.txt
+-r requirements.txt # include prod requirements
+pytest
